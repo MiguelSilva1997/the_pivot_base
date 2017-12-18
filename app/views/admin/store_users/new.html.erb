@@ -1,0 +1,12 @@
+<%= form_for(@store_user, url: admin_store_admins_path) do |f| %>
+
+  <%= f.label :email %><br>
+  <%= f.text_field :user_id %>
+
+<div class="status_select_box">
+  <%= f.label :status %> <br />
+  <%= select_tag :status, options_for_select(@roles) %>
+</div>
+
+  <%= f.submit %>
+<% end %>

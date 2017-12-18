@@ -1,10 +1,10 @@
 <h1><%= current_user.first_name %></h1>
 <h2><%= link_to "All Categories",  platform_admin_categories_path %></h2>
 <h2><%= link_to 'Manage Accounts', platform_admin_users_path %></h2>
-<h3><%= link_to "Stores Pending", platform_admin_dashboard (status: "pending") %></h3>
-<h3><%= link_to "Stores Declined", platform_admin_dashboard (status: "declined") %></h3>
-<h3><%= link_to "Stores Active", platform_admin_dashboard (status: 'active') %></h3>
-<h3><%= link_to "Stores Suspended", platform_admin_dashboard (status: 'suspended') %></h3>
+<h3><%= link_to "Stores Pending", platform_admin_dashboard_path(status: "pending") %></h3>
+<h3><%= link_to "Stores Declined", platform_admin_dashboard_path(status: "declined") %></h3>
+<h3><%= link_to "Stores Active", platform_admin_dashboard_path(status: 'active') %></h3>
+<h3><%= link_to "Stores Suspended", platform_admin_dashboard_path(status: 'suspended') %></h3>
 <% @stores.each do |store| %>
-  <h2><%= link_to store.name, admin_store_path(store)%></h2>
+  <h2><%= link_to store.name, admin_store_path(store.url)%></h2>
 <% end %>
