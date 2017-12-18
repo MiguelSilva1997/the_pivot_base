@@ -11,7 +11,7 @@ FactoryBot.define do
     factory :order_with_items do
       after(:create) do |order, evaluator|
         evaluator.items_with_quantity.each do |item_with_quantity|
-          item     = create(:item)
+          item     = item_with_quantity.keys.first
           quantity = item_with_quantity.values.first
           create(:order_item, order: order, item: item, quantity: quantity)
         end
