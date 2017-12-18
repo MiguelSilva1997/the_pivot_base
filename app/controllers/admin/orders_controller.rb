@@ -5,5 +5,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def show
-  end  
+    @store = current_user.stores.find_by(url: params[:store_name])
+    @order = Order.find(params[:id])
+  end
 end
