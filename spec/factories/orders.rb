@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :order do
     status 1
     user
+    store
 
     transient do
       items_with_quantity [{create(:item) => 1}]
