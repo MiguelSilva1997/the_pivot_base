@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       get '/:store_name/edit' => :edit, as: 'edit_store'
       put '/:store_name' => :update
       patch '/:store_name' => :update
-      delete '/:store_name' => :destroy
 
       controller :orders do
         get '/:store_name/orders' => :index, as: 'store_orders'

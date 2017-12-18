@@ -6,7 +6,7 @@
 <body>
 	<div class = "container">
 	<h4><%= link_to "Continue shopping", store_path %></h4>
-  <% @items.each do |item| %>
+  <% @store.items.each do |item| %>
 		<div class="row text-center">
 			<div class='col-6'>
 				<%= image_tag item.image  %>
