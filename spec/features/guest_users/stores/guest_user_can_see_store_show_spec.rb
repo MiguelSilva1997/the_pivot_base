@@ -16,10 +16,10 @@ feature "a guest user visits a specific store" do
     end
 
     it "they see all items associated with that store" do
-      expect(page).to have_content(active_store.items.first.title)
-      expect(page).to have_content(active_store.items.second.title)
-      expect(page).to have_content(active_store.items.third.title)
-      expect(page).to have_content(active_store.items.last.title)
+      expect(page).to have_link(active_store.items.first.title)
+      expect(page).to have_link(active_store.items.second.title)
+      expect(page).to have_link(active_store.items.third.title)
+      expect(page).to have_link(active_store.items.last.title)
     end
   end
 
@@ -35,7 +35,7 @@ feature "a guest user visits a specific store" do
         visit store_path(declined_store.url)
       }.to raise_error(ActionController::RoutingError)
     end
-    
+
     it "they see a 404 for a suspended store" do
       expect {
         visit store_path(suspended_store.url)
