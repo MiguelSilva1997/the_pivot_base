@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         get '/:store_name/:item_name/edit' => :edit, as: 'edit_store_item'
         get '/:store_name/:item_name' => :show, as: 'store_item'
         put '/:store_name/:item_name' => :update
+        patch '/:store_name/:item_name' => :update
         delete '/:store_name/:item_name' => :destroy
       end
 
@@ -71,9 +72,13 @@ Rails.application.routes.draw do
 
   resource :cart, only: [:create, :destroy, :update, :show]
 
-  get '/:store_name', to: 'stores#show', as: 'store'
+
 
   get '/stores/new', to: 'stores#new', as: 'new_store'
+
+  post '/stores', to: 'stores#create'
+
+  get '/:store_name', to: 'stores#show', as: 'store'
 
   get '/:store_name/:item_name', to: 'items#show', as: 'store_item'
 
