@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171218235512) do
-=======
-ActiveRecord::Schema.define(version: 20171218232856) do
->>>>>>> add order to store model
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,13 +59,8 @@ ActiveRecord::Schema.define(version: 20171218232856) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-<<<<<<< HEAD
     t.bigint "store_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
-=======
-    t.bigint "stores_id"
-    t.index ["stores_id"], name: "index_orders_on_stores_id"
->>>>>>> add order to store model
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

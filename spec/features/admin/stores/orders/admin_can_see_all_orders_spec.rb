@@ -12,6 +12,7 @@ feature "Store Admin can see all orders associated with a store" do
 
   context "As an authenticated store admin" do
     it 'I can see all orders for the store' do
+      binding.pry
 
       visit admin_store_path(store.url)
 
