@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 feature "Store Admin can see all orders associated with a store" do
-  let(:admin) { create(:store_admin_with_store_items) }
+  let(:admin) { create(:store_admin_with_store_order) }
   let(:user)  { create(:user) }
   let(:store) { admin.stores.first }
   let(:item)  { store.items.first }
-  let (:order) {create(:order, user: user)}
-  let(:order_items) {create(:order_item, order: order, item: item, quantity: 1)}
+  let(:order) { store.orders.first }
+
 
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
@@ -14,8 +14,9 @@ feature "Store Admin can see all orders associated with a store" do
 
   context "As an authenticated store admin" do
     it 'I can see all orders for the store' do
+      binding.pry
 
-      visit admin_store_order_path(store.url, order)
+      visit admin_store_orders_path(store.url)
       save_and_open_page
 
 
