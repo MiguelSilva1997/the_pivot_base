@@ -18,10 +18,10 @@ feature "a registered user visits a specific store" do
     end
 
     it "they see all items associated with that store" do
-      expect(page).to have_content(active_store.items.first.title)
-      expect(page).to have_content(active_store.items.second.title)
-      expect(page).to have_content(active_store.items.third.title)
-      expect(page).to have_content(active_store.items.last.title)
+      expect(page).to have_link(active_store.items.first.title)
+      expect(page).to have_link(active_store.items.second.title)
+      expect(page).to have_link(active_store.items.third.title)
+      expect(page).to have_link(active_store.items.last.title)
     end
   end
 
@@ -29,7 +29,7 @@ feature "a registered user visits a specific store" do
     before do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     end
-    
+
     it "they see a 404 for a pending store" do
       expect {
         visit store_path(pending_store.url)
