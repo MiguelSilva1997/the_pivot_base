@@ -47,6 +47,14 @@ FactoryBot.define do
       end
     end
 
+    factory :platform_admin_with_store_order, class: User do
+      after(:create) do |user|
+        role = create(:role, name: "platform_admin")
+        store = create(:store_with_order)
+        create(:store_user, user: user, role: role, store: store)
+      end
+    end
+
     factory :platform_admin_with_store_items, class: User do
       after(:create) do |user|
         role = create(:role, name: "platform_admin")
