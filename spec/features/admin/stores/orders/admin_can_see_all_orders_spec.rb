@@ -25,6 +25,13 @@ feature "Store Admin can see all orders associated with a store" do
       expect(page).to have_content(order.status.titleize)
     end
   end
+
+  it "I can see the total number of orders for each status" do
+    visit admin_store_orders_path(store.url)
+
+    expect(page).to have_content("Ordered")
+
+  end
 end
 
 
@@ -36,13 +43,7 @@ end
 # I can click on “mark as paid” on orders that are “ordered”
 # I can click on “mark as completed” on orders that are “paid”
 
-    # xit "I can see the total number of orders for each status" do
-    #   visit admin_dashboard_index_path
-    #
-    #   expect(page).to have_content(order_1.id)
-    #   expect(page).to have_content(order_1.date)
-    #   expect(page).to have_content(order_1.status.capitalize)
-    # end
+
     #
     # xit "I can see orders filtered by status" do
     #   visit admin_dashboard_index_path
