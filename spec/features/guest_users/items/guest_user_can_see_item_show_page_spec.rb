@@ -13,6 +13,6 @@ feature "guest user clicks on item link" do
     expect(page).to have_content(item.title)
     expect(page).to have_content(item.description)
     expect(page).to have_content(item.price)
-    expect(first("img")['alt']).to have_content(item.title)
+    expect(page).to have_css("img[src*=#{item.image.url}]")
   end
 end
