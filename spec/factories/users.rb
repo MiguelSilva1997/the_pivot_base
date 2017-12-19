@@ -105,6 +105,14 @@ FactoryBot.define do
       end
     end
 
+    factory :store_manager_with_store_order, class: User do
+      after(:create) do |user|
+        role = create(:role, name: "store_manager")
+        store = create(:store_with_order)
+        create(:store_user, user: user, role: role, store: store)
+      end
+    end
+
     factory :default_user, class: User do
       after(:create) do |user|
         role = create(:role, name: "default")

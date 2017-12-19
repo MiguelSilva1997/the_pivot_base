@@ -11,7 +11,13 @@
           <th>Order Placed</th>
           <th>Order Status</th>
           <th>Total</th>
+<<<<<<< HEAD
           <th>Update</th>
+=======
+          <% if current_user.store_admin? || current_user.platform_admin? %>
+          <th>Update</th>
+          <% end %>
+>>>>>>>  add conditional update option for store manager
         </tr>
       </thead>
       <tbody>
@@ -28,7 +34,13 @@
               <% end %>
               <%= number_to_currency(sum) %>
           </td>
+<<<<<<< HEAD
           <td>  <%= link_to "Edit Order", admin_store_order_path(@store.url, order) %> </td>
+=======
+          <% if current_user.store_admin? || current_user.platform_admin? %>
+          <td>  <%= link_to "Edit Order", admin_store_order_path(@store.url, order) %> </td>
+          <% end %>
+>>>>>>>  add conditional update option for store manager
           </tr>
         <% end %>
       </tbody>

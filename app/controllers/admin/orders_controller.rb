@@ -3,7 +3,6 @@ class Admin::OrdersController < ApplicationController
   def index
     @store = current_user.stores.find_by(url: params[:store_name])
     @orders = @store.orders
-    @statuses = Order.statuses.keys
   end
 
   def show

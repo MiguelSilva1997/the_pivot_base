@@ -47,6 +47,7 @@ class PermissionService
     return true if controller == "main" && action.in?(%w(index))
     return true if controller == "admin/stores" && action.in?(%w(index show new create))
     return true if controller == "admin/items" && action.in?(%w(update edit index show)) #potentially nested resource with category or store
+    return true if controller == "admin/orders" && action.in?(%w(index show))
     return true if controller == "sessions" && action.in?(%w(new create destroy))
     return true if controller == "carts" && action.in?(%w(index create update destroy))
     return true if controller == "orders" && action.in?(%w(index create show update)) #change controller method from new to create
@@ -59,6 +60,7 @@ class PermissionService
     return true if controller == "main" && action.in?(%w(index))
     return true if controller == "admin/stores" && action.in?(%w(index show new create update edit))
     return true if controller == "admin/items" && action.in?(%w(update edit index show destroy new create)) #potentially nested resource with category or store
+    return true if controller == "admin/orders" && action.in?(%w(update index show))
     return true if controller == "sessions" && action.in?(%w(new create destroy))
     return true if controller == "carts" && action.in?(%w(index create update destroy))
     return true if controller == "admin/orders" && action.in?(%w(index create show update)) #change controller method from new to create
