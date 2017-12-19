@@ -16,6 +16,11 @@ Rails.application.routes.draw do
       put '/:store_name' => :update
       patch '/:store_name' => :update
 
+      controller :orders do
+        get '/:store_name/orders' => :index, as: 'store_orders'
+        get '/:store_name/orders/:id' => :show, as: 'store_order'
+        put '/:store_name/orders/:id' => :update
+      end
 
       controller :items do
         post '/:store_name/items' => :create
@@ -28,20 +33,17 @@ Rails.application.routes.draw do
         delete '/:store_name/:item_name' => :destroy
       end
 
-      controller :orders do
-        get '/:store_name/orders' => :index, as: 'store_orders'
-        get '/:store_name/orders/:id' => :show, as: 'store_order'
-        put '/:store_name/orders/:id' => :update
-      end
+
 
       controller :store_users do
         get '/:store_name/admins/new' => :new, as: 'new_store_user'
-        post '/:store_name/admins' => :create
         get '/:store_name/admins/:id' => :edit, as: 'edit_store_user'
         put '/:store_name/admins/:id' => :update
+        patch '/:store_name/admins/:id' => :update
         get '/:store_name/admins/:id' => :show, as: 'store_admin'
         delete '/:store_name/admins/:id' => :destroy
         get '/:store_name/admins' => :index, as: 'store_admins'
+        post '/:store_name/admins' => :create
       end
     end
   end

@@ -1,7 +1,11 @@
 class PlatformAdminController < ApplicationController
 
   def index
-    @stores = Store.all
+    if params[:status]
+      @stores = Store.where(status: params[:status])
+    else
+      @stores = Store.all
+    end
   end
 
 end

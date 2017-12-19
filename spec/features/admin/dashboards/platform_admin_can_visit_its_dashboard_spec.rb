@@ -35,15 +35,4 @@ describe 'when a platform admin visits its dashboard' do
     expect(User.account_manager(@platform_admin.id).count).to eq(15)
     expect(page).to have_content("Gob")
   end
-
-  it "click on a user name and takes you to the user edit page" do
-    login_user(@platform_admin.email, @platform_admin.password)
-
-    visit platform_admin_users_path
-
-    click_on "Gob0"
-
-    expect(current_path).to eq("/platform_admin/users/4/edit")
-  end
-
 end
