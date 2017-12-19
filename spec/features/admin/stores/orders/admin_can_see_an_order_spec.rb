@@ -15,8 +15,10 @@ feature "Admin can see an order associated with a store" do
   context "As an authenticated store admin" do
     it 'I can see all orders for the store' do
 
+      visit admin
+
       visit admin_store_order_path(store.url, order)
-      save_and_open_page
+
 
 
 
