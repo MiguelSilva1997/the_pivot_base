@@ -1,13 +1,15 @@
 require 'rails_helper'
 
 feature "a guest user visits a specific store" do
-  let(:active_store) {create(:store_with_items, status: 'active')}
+  let(:active_store) {create(:store_with_inactive_items, status: 'active')}
   let(:pending_store) {create(:store, status: 'pending')}
   let(:declined_store) {create(:store, status: 'declined')}
   let(:suspended_store) {create(:store, status: 'suspended')}
+  let(:inactive_item) {active_store.items.last}
 
   context "they visit an active store" do
     before do
+      @non_store_item = create(:item)
       visit store_path(active_store.url)
     end
 
@@ -15,11 +17,17 @@ feature "a guest user visits a specific store" do
       expect(page).to have_content(active_store.name)
     end
 
-    it "they see all items associated with that store" do
+    it "they see all active items associated with that store" do
       expect(page).to have_link(active_store.items.first.title)
       expect(page).to have_link(active_store.items.second.title)
-      expect(page).to have_link(active_store.items.third.title)
-      expect(page).to have_link(active_store.items.last.title)
+    end
+
+    it "they do not see inactive items associated with that store" do
+      expect(page).to_not have_link(inactive_item.title)
+    end
+
+    it "they do not see items associated with other stores" do
+      expect(page).to_not have_link(@non_store_item.title)
     end
   end
 
