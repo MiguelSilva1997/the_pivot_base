@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-feature "guest user clicks on item link" do
+feature "registered user clicks on item link" do
   let(:store) {create(:store_with_items)}
   let(:item) { store.items.first }
+  let(:user)  { create(:user) }
 
   before do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     visit store_path(store.url)
     click_link "#{item.title}"
   end
