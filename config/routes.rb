@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:create, :destroy, :update, :show]
 
 
+  get '/categories/:category_name', to: 'categories#show', as: 'category'
 
   get '/stores/new', to: 'stores#new', as: 'new_store'
 
@@ -84,6 +85,5 @@ Rails.application.routes.draw do
 
   get '/:store_name/:item_name', to: 'items#show', as: 'store_item'
 
-  get '/categories/:category_name', to: 'categories#show', as: 'category'
 
 end
