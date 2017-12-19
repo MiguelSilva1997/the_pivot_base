@@ -30,6 +30,20 @@ feature "Store Admin can see all orders associated with a store" do
     visit admin_store_orders_path(store.url)
 
     expect(page).to have_content("Ordered")
-
   end
+
+  it "I can see a link to edit an order" do
+    visit admin_store_orders_path(store.url)
+
+    click_on "Edit Order"
+    expect(current_path).to eq(admin_store_order_path(store.url, order))
+  end
+
+  it "I can see a link to see a specifc order details" do
+    visit admin_store_orders_path(store.url)
+
+    click_on "#{order.id}"
+    expect(current_path).to eq(admin_store_order_path(store.url, order))
+  end
+
 end
