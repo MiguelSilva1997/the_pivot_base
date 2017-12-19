@@ -38,8 +38,9 @@
   <b>Order Placed by:</b> <%= @order.user.full_name %><br />
   <b>Order Address:</b> <%= @order.user.address %><br />
   <b>Order Status:</b> <%= @order.status.titleize %> />
-
-  <% if @order.status.titleize == ("Ordered" || "Paid") %>
-<%= link_to "Cancel", admin_store_order_path(@store.url, @order.id, status: 'cancelled'), method: :put %>
+<% if current_user.store_admin? || current_user.platform_admin? %>
+<% if @order.status.titleize == ("Ordered" || "Paid") %>
+  <%= link_to "Cancel", admin_store_order_path(@store.url, @order.id, status: 'cancelled'), method: :put %>
+<% end %>
 <% end %>
 </div>

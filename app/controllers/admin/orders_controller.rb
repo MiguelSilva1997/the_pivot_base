@@ -11,13 +11,12 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+    store = current_user.stores.find_by(url: params[:store_name])
+    order = Order.find(params[:id])
 
-    @store = current_user.stores.find_by(url: params[:store_name])
-    @order = Order.find(params[:id])
-
-    if @order.update(order_params)
-      flash[:success] = "#{@order.id} successfully updated"
-      redirect_to admin_store_path(@store.url)
+    if order.update(order_params)
+      flash[:success] = "#{order.id} successfully updated"
+      redirect_to admin_store_path(store.url)
     else
       flash[:danger] = "Please try updating again"
       redirect_to admin_store_orders_path(store.url)

@@ -6,7 +6,7 @@ FactoryBot.define do
     factory :ordered_order do
       status 0
     end
-    
+
     factory :paid_order do
       status 1
     end
