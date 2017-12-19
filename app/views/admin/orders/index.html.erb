@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 <h1><%= @store.name.titleize  %> 's Orders </h1>
 <% @orders.count_by_status.each do |key, value| %>
   <h3>  <%= key.titleize %> : <%= value %></h3>
 <% end %>
+=======
+>>>>>>> 018b4642eea744e47928c1e7a4000164d0542ada
 <div class="container">
   <center>
     <table class="table table-hover">
@@ -11,7 +14,10 @@
           <th>Order Placed</th>
           <th>Order Status</th>
           <th>Total</th>
+<<<<<<< HEAD
           <th>Update</th>
+=======
+>>>>>>> 018b4642eea744e47928c1e7a4000164d0542ada
         </tr>
       </thead>
       <tbody>
@@ -28,7 +34,10 @@
               <% end %>
               <%= number_to_currency(sum) %>
           </td>
+<<<<<<< HEAD
           <td>  <%= link_to "Edit Order", admin_store_order_path(@store.url, order) %> </td>
+=======
+>>>>>>> 018b4642eea744e47928c1e7a4000164d0542ada
           </tr>
         <% end %>
       </tbody>
