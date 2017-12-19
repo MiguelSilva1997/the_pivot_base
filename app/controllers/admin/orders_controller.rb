@@ -3,17 +3,12 @@ class Admin::OrdersController < ApplicationController
   def index
     @store = current_user.stores.find_by(url: params[:store_name])
     @orders = @store.orders
-<<<<<<< HEAD
-
-=======
->>>>>>> 018b4642eea744e47928c1e7a4000164d0542ada
   end
 
   def show
     @store = current_user.stores.find_by(url: params[:store_name])
     @order = Order.find(params[:id])
   end
-<<<<<<< HEAD
 
   def update
 
@@ -35,6 +30,4 @@ class Admin::OrdersController < ApplicationController
     params.permit(:status)
   end
 
-=======
->>>>>>> 018b4642eea744e47928c1e7a4000164d0542ada
 end
