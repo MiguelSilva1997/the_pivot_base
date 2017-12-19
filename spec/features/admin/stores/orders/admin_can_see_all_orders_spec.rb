@@ -25,4 +25,11 @@ feature "Store Admin can see all orders associated with a store" do
       expect(page).to have_content(order.status.titleize)
     end
   end
+
+  it "I can see the total number of orders for each status" do
+    visit admin_store_orders_path(store.url)
+
+    expect(page).to have_content("Ordered")
+
+  end
 end
