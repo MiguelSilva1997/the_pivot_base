@@ -30,65 +30,20 @@ feature "Store Admin can see all orders associated with a store" do
     visit admin_store_orders_path(store.url)
 
     expect(page).to have_content("Ordered")
-
   end
+
+  it "I can see a link to edit an order" do
+    visit admin_store_orders_path(store.url)
+
+    click_on "Edit Order"
+    expect(current_path).to eq(admin_store_order_path(store.url, order))
+  end
+
+  it "I can see a link to see a specifc order details" do
+    visit admin_store_orders_path(store.url)
+
+    click_on "#{order.id}"
+    expect(current_path).to eq(admin_store_order_path(store.url, order))
+  end
+
 end
-
-
-
-# and I can see the total number of orders for each status (ordered, paid, cancelled, completed)
-# and I can see a link for each individual order
-# and I have links that transition between statuses
-# I can click on “cancel” on individual orders which are “paid” or “ordered”
-# I can click on “mark as paid” on orders that are “ordered”
-# I can click on “mark as completed” on orders that are “paid”
-
-
-    #
-    # xit "I can see orders filtered by status" do
-    #   visit admin_dashboard_index_path
-    #
-    #   click_on("Ordered")
-    #
-    #   expect(current_path).to eq(admin_dashboard_index_path)
-    #   expect(page).to have_link(order_1.id, href: order_path(order_1))
-    #   expect(page).not_to have_link(order_2.id)
-    # end
-    #
-    # xit "I can change the status of orders" do
-    #   visit admin_dashboard_index_path
-    #
-    #   within(".order-#{order_2.id}") do
-    #     click_on("Cancel")
-    #   end
-    #
-    #   expect(current_path).to eq(admin_dashboard_index_path)
-    #
-    #   within(".order-#{order_2.id}") do
-    #     expect(page).to have_content("Cancelled")
-    #   end
-    #
-    #   within(".order-#{order_1.id}") do
-    #     click_on("Mark as Paid")
-    #   end
-    #
-    #   xexpect(current_path).to eq(admin_dashboard_index_path)
-    #
-    #   within(".order-#{order_1.id}") do
-    #     within(".status") do
-    #       expect(page).to have_content("Paid")
-    #     end
-    #   end
-    #
-    #   within(".order-#{order_1.id}") do
-    #     click_on("Mark as Completed")
-    #   end
-    #
-    #   expect(current_path).to eq(admin_dashboard_index_path)
-    #
-    #   within(".order-#{order_1.id}") do
-    #     within(".status") do
-    #       expect(page).to have_content("Completed")
-    #     end
-    #   end
-    # end
