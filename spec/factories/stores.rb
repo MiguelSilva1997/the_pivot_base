@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :store do
     sequence(:name) {|n| "MyString#{n}" }
-    status 1
+    status 2
 
 
   factory :store_with_items, class: Store do
