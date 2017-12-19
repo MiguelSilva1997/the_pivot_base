@@ -15,9 +15,20 @@ feature "Admin can see an order associated with a store" do
 
       visit admin_store_order_path(store.url, order)
 
+
       expect(page).to have_content(order.id)
       expect(page).to have_content(order.date)
-      expect(page).to have_content(order.status)
+      expect(page).to have_content(order.status.titleize)
+    end
+
+    it 'I can update the status of a specific order' do
+      visit admin_store_order_path(store.url, order)
+      click_on "Cancel"
+
+
+      expect(page).to have_content("#{order.id} successfully updated")
+      admin_store_path(store.url)
+
     end
   end
 end
