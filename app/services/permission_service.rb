@@ -26,7 +26,7 @@ class PermissionService
   def guest_user_permissions
     return true if controller == "main" && action.in?(%w(index))
     return true if controller == "stores" && action.in?(%w(index show))
-    return true if controller == "items" && action.in?(%w(index show)) #potentially nested resource with category or store
+    return true if controller == "items" && action.in?(%w(index show)) 
     return true if controller == "sessions" && action.in?(%w(new create destroy))
     return true if controller == "carts" && action.in?(%w(index create update destroy))
     return true if controller == "users" && action.in?(%w(new create))

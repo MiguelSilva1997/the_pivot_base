@@ -13,15 +13,12 @@
 				</div>
 			<div class='col-6 card bg-info'>
 				<div class='card-body '>
-				<h2><strong><%= link_to "#{item.title}", store_item_path(@store.url, item.url) %></strong></h2> <br />
-				<%= item.description %> <br /> <br />
-				Price:$ <%= item.price %> <br />
 				<% unless item.retired? %>
-				<%= link_to "Add to cart", cart_path(id: item.id), class: "badge badge-primary" %></center>
-				<% else %>
-				<div class="badge badge-secondary">
-					Retired
-				</div>
+					<h2><strong><%= link_to "#{item.title}", store_item_path(@store.url, item.url) %></strong></h2> <br />
+					<%= item.description %> <br /> <br />
+					Price:$ <%= item.price %> <br />
+					<%= link_to "Add to cart", cart_path(id: item.id), class: "badge badge-primary" %></center>
+
 				<% end %>
 				<% end %>
 				</div>
