@@ -2,7 +2,6 @@ FactoryBot.define do
   factory :order do
     user
     store
-<<<<<<< HEAD
 
     factory :ordered_order do
       status 0
@@ -19,8 +18,6 @@ FactoryBot.define do
     factory :completed_order do
       status 3
     end
-=======
->>>>>>> 018b4642eea744e47928c1e7a4000164d0542ada
 
     transient do
       items_with_quantity [{create(:item) => 1}]
