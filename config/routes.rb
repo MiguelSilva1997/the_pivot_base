@@ -39,6 +39,7 @@ Rails.application.routes.draw do
         get '/:store_name/admins/new' => :new, as: 'new_store_user'
         get '/:store_name/admins/:id' => :edit, as: 'edit_store_user'
         put '/:store_name/admins/:id' => :update
+        patch '/:store_name/admins/:id' => :update
         get '/:store_name/admins/:id' => :show, as: 'store_admin'
         delete '/:store_name/admins/:id' => :destroy
         get '/:store_name/admins' => :index, as: 'store_admins'
