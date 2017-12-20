@@ -2,12 +2,12 @@ class ChargesController < ApplicationController
   before_action :total_cost
 
   def new
-
+    @order = current_user.orders.find(params[:order]) if params[:order]
   end
 
   def create
     if current_user.stripe_customer_id
-      @customer = Stripe::Customer.retrieve({current_user.stripe_customer_id})
+      @customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
       @customer.sources.create({:source => current_user.stripeToken})
     else
       create_customer
@@ -36,10 +36,11 @@ class ChargesController < ApplicationController
   def create_charge
     StripeTool.create_charge(
       :customer_id    => @customer.id,
-      :amount      => @amount,
+      :amount      => @amount.to_i,
       :description => 'Rails Stripe customer'
     )
-    current_user.update!(stripe_token: params[:stripeToken], stripe_customer_id: @customer.id)
+    current_user.stripe_token= params[:stripeToken]
+    current_user.stripe_customer_id = @customer.id
   end
 
   def create_order
