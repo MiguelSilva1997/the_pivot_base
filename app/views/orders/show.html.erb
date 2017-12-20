@@ -33,7 +33,9 @@
     </tr>
     </tbody>
   </table>
-
+  <% if @order.status == "ordered" %>
+  <h3><%= link_to "Pay Total with Stripe", new_charge_path(total: sum, order: @order.id), class: 'btn btn-primary' %></h3>
+  <% end %>
   <p><b>Order Date:</b> <%= @order.date %><br />
   <b>Order Placed by:</b> <%= @order.user.full_name %><br />
   <b>Order Address:</b> <%= @order.user.address %><br />
