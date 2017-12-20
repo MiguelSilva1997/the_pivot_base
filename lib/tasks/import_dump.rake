@@ -38,6 +38,17 @@ namespace :category do
   end
 end
 
+namespace :roles do
+  desc "create roles"
+  task create_roles: :environment do
+    Role.create(name: "The Chill Store")
+    Store.create(name: "Amazon")
+    Store.create(name: "Etsy")
+    Store.create(name: "The Yellow Bottle Store")
+    Store.create(name: "Walmart")
+  end
+end
+
 namespace :items do
   desc "Update existing items with stores"
   task update_item: :environment do
