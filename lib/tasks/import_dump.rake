@@ -21,17 +21,6 @@ namespace :stores do
   end
 end
 
-namespace :roles do
-  desc "create roles"
-  task create_roles: :environment do
-    Role.create(name: "The Chill Store")
-    Store.create(name: "Amazon")
-    Store.create(name: "Etsy")
-    Store.create(name: "The Yellow Bottle Store")
-    Store.create(name: "Walmart")
-  end
-end
-
 namespace :items do
   desc "Update existing items with stores"
   task update_item: :environment do
@@ -45,6 +34,23 @@ namespace :items do
         store = Store.all.sample
         url = item.title.parameterize
         item.update!(store_id: store.id, url: url)
+      end
+    end
+    puts " All done now!"
+  end
+end
+
+namespace :orders do
+  desc "Update existing orders with stores"
+  task update_order: :environment do
+    orders = Order.all
+    puts "Going to update #{orders.count} orders"
+
+
+    ActiveRecord::Base.transaction do
+      orders.each do |order|
+        store = Store.all.sample
+        order.update!(store_id: store.id)
       end
     end
     puts " All done now!"
