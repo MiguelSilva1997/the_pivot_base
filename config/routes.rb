@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:create, :index, :show]
   end
 
+  resources :charges
+
   get '/account/edit', to: 'users#edit'
   put '/account/:id', to: 'users#update'
   patch '/account/:id', to: 'users#update'
