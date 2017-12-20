@@ -15,6 +15,6 @@ describe "when an admin clicks on edit employee and fills out the form" do
     select('store_admin', :from => 'store_user[role_id]')
     click_on "Update Store user"
 
-    expect(page).to have_content('Store Admin')
+tom     expect(page).to have_content('Store Admin')
   end
 end
