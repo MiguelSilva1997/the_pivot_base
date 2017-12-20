@@ -1,7 +1,7 @@
-class CartController < ApplicationController
+class CartsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
-  def index
+  def show
     @items = @cart.cart_items
   end
 
