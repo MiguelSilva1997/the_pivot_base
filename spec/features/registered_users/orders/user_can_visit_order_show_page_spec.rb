@@ -11,10 +11,6 @@ describe "As a user" do
 
       visit user_orders_path(user.id)
 
-<<<<<<< HEAD
-=======
-      visit user_orders_path(user)
->>>>>>> fixed one failing test
       click_on order.id
 
 

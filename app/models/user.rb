@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  
   has_secure_password
   has_many :orders
 
@@ -47,6 +48,8 @@ class User < ApplicationRecord
   def self.user_quantity_of_items_ordered
     group(:email).joins(orders: :order_items).sum(:quantity)
   end
+
+
 
 #should probably be in presenter
   def store_role(store_id)
