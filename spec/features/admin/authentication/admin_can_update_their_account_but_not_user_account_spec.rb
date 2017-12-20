@@ -3,59 +3,32 @@ require "rails_helper"
 describe "As a logged in Store Admin" do
   let(:admin) {create(:store_admin)}
 
-  it "I can see my personal account information" do
+  before do
     login_user(admin.email, admin.password)
     click_on "My Account"
+  end
+
+  it "I can see my personal account information" do
 
     expect(current_path).to eq(dashboard_index_path)
     expect(page).to have_content("Edit Account")
   end
 
-  xit "I can modify my account info" do
-    new_email_address = "kramer@example.com"
-    new_password      = "cosmo"
+  it "I can modify my account info" do
+    click_on "Edit Account"
 
-    fill_in "user[email]", with: new_email_address
-    fill_in "user[password]", with: new_password
-    click_on "Submit"
+    expect(current_path).to eq(account_edit_path)
 
+    fill_in "user[email]", with: "kramer@example.com"
+    fill_in "user[password]", with: "cosmo"
+    click_on "Update Account Information"
     click_on "Logout"
-    login_user(new_email_address, new_password)
-    expect(current_path).to eq("/admin/dashboard")
+
+    login_user("kramer@example.com", "cosmo")
+    click_on "My Account"
+
+    expect(current_path).to eq(dashboard_index_path)
+    expect(page).to have_content("kramer@example.com")
   end
 
-  it "returns a 404 when an admin visits registered user dashboard" do
-
-    allow_any_instance_of(ApplicationController).to receive(:current_user). and_return(@admin)
-    allow_any_instance_of(ApplicationController).to receive(:current_user). and_return(admin)
-    user = create(:user)
-
-    expect {
-      visit dashboard_index_path(user)
-    }.to raise_error(ActionController::RoutingError)
-  end
-
-  xit "I can modify another store admin role" do
-    # allow_any_instance_of(ApplicationController).to receive(:current_user). and_return(@admin)
-    # visit admin_dashboard_index_path
-    #
-    #
-    # expect {
-    #   visit dashboard_index_path(user)
-    # }.to raise_error(ActionController::RoutingError)
-  end
-
-  it "returns a welcome message for admins" do
-    allow_any_instance_of(ApplicationController).to receive(:current_user). and_return(@admin)
-    visit admin_dashboard_index_path
-    expect(page).to have_content("You're logged in as an Administrator")
-  end
-
-  it "returns a 404 when a non-admin visits the admin dashboard" do
-    user = create(:user)
-    allow_any_instance_of(ApplicationController).to receive(:current_user). and_return(user)
-    expect {
-      visit admin_dashboard_index_path
-    }.to raise_error(ActionController::RoutingError)
-  end
 end
