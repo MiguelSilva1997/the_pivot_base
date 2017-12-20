@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def registered_user?
-    roles.empty?
+    id != nil && roles.empty?
   end
 
   def store_manager?
