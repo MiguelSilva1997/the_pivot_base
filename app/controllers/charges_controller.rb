@@ -6,7 +6,12 @@ class ChargesController < ApplicationController
   end
 
   def create
-    create_customer
+    if current_user.stripe_customer_id
+      @customer = Stripe::Customer.retrieve({current_user.stripe_customer_id})
+      @customer.sources.create({:source => current_user.stripeToken})
+    else
+      create_customer
+    end
     create_charge
     checkout_method
     redirect_to user_orders_path(current_user)
