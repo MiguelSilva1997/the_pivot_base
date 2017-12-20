@@ -4,10 +4,10 @@ RSpec.feature "User can place an order" do
   it "and see the message 'order was successfully placed'" do
 
     user = User.create(first_name: "Tester", last_name: "McTesty", email: "testerson@testmail.com", password: "testing", address: "dummy address")
+    item = create(:item)
 
-    create_items
 
-    visit items_path
+    visit store_item_path
 
     click_on "Add to cart"
 
@@ -25,7 +25,7 @@ RSpec.feature "User can place an order" do
     end
 
     click_on "Cart"
-    
+
     expect(page).to have_content("Checkout")
 
     click_on "Checkout"
