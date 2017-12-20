@@ -1,29 +1,20 @@
 require "rails_helper"
 
 describe "As a logged in Store Admin" do
-  before(:all) do
-    @admin = create(:user, email: "store_admin@example.com")
-    role = create(:role, name: "store_admin")
-    store = create(:store)
-    #create(:user_role, user: @admin, role: role, store: store)
-  end
-
-  # before(:all) do
-  #   @admin = create(:user, email: "store_admin@example.com")
-  #   role = create(:role, name: "store_admin")
-  #   store = create(:store)
-  #   create(:user_role, user: @admin, role: role, store: store)
-  # end
-
   let(:admin) {create(:store_admin)}
 
-  it "I can modify my account data" do
-    login_user(@admin.email, @admin.password)
+  it "I can see my personal account information" do
+    login_user(admin.email, admin.password)
+    click_on "My Account"
+
+    expect(current_path).to eq(dashboard_index_path)
+    expect(page).to have_content("Edit Account")
+  end
+
+  xit "I can modify my account info" do
     new_email_address = "kramer@example.com"
     new_password      = "cosmo"
 
-    visit admin_dashboard_index_path
-    click_on "Update Account"
     fill_in "user[email]", with: new_email_address
     fill_in "user[password]", with: new_password
     click_on "Submit"
