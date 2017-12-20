@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218235512) do
+ActiveRecord::Schema.define(version: 20171220175212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
-    t.string "url"
+    t.string "slug"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "items", force: :cascade do |t|
@@ -25,10 +26,10 @@ ActiveRecord::Schema.define(version: 20171218235512) do
     t.string "description"
     t.float "price"
     t.string "image"
-    t.integer "status", default: 0
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condition", default: 0
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(version: 20171218235512) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status", default: 0
+    t.integer "status"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,6 +98,8 @@ ActiveRecord::Schema.define(version: 20171218235512) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_foreign_key "items", "categories"

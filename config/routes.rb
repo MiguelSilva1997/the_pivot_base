@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/login', :to => 'sessions#create'
   delete '/logout', :to => 'sessions#destroy'
 
+
   namespace :admin do
     controller :stores do
       get '/:store_name' => :show, as: 'store'
@@ -66,6 +67,8 @@ Rails.application.routes.draw do
   resources :users , only: [:new, :create ] do
     resources :orders, only: [:create, :index, :show]
   end
+
+  resources :password_resets, only: [:edit, :update]
 
   get '/account/edit', to: 'users#edit'
   put '/account/:id', to: 'users#update'

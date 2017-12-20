@@ -6,7 +6,7 @@ class CartController < ApplicationController
   end
 
   def create
-    binding.pry
+
     item = Item.find(params[:item_id])
     @cart.add_item(item.id)
     session[:cart] = @cart.contents
