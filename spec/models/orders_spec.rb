@@ -22,6 +22,11 @@ RSpec.describe Order do
       expect(order).to respond_to(:user)
     end
 
+    it 'belongs to a store' do
+      order = build(:order)
+      expect(order).to respond_to(:store)
+    end
+
     it 'has many items' do
       item = create(:item)
       order = build(:order, items: [item])

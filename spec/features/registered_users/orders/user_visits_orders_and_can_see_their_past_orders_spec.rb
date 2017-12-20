@@ -10,7 +10,7 @@ describe "As a user" do
       order_1 = create(:order_with_items, user: user, items_with_quantity: items_with_quantity)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit '/orders'
+      visit user_orders_path(user)
 
       expect(page).to have_css(".order", count: 2)
 

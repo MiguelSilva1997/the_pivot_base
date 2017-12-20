@@ -9,7 +9,7 @@ describe "As a user" do
       order = create(:order_with_items, user: user, items_with_quantity: items_with_quantity)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit '/orders'
+      visit user_orders_path(user)
       click_on order.id
 
       expect(current_path).to eq(order_path(order))
