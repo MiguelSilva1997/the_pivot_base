@@ -30,18 +30,21 @@ describe "validations" do
     end
   end
 
-  # context "it can have one of two roles" do
-  #   it "has a role" do
-  #     user = build(:user)
-  #     expect(user.role).to eq("default")
-  #   end
-  # end
-
   describe 'realtionships' do
-    it 'has mansy roles' do
+    it 'has many roles' do
       user = build(:user)
       expect(user).to respond_to(:roles)
     end
+
+      it 'has many stores' do
+        user = build(:user)
+        expect(user).to respond_to(:stores)
+      end
+
+      it 'has many stores_users' do
+        user = build(:user)
+        expect(user).to respond_to(:store_users)
+      end
 
   context "instance methods" do
     it "can return user's full name" do
@@ -52,6 +55,29 @@ describe "validations" do
     it "can return the date a user joined" do
       user = User.create(first_name: "McTest",last_name: "McTest", password: "testing", email: "tester@testmail", created_at: "2017-09-13 01:13:04 -0600")
       expect(user.date_joined).to eq("Sep. 13, 2017")
+    end
+
+    it "can check if store_manager" do
+      user = User.create(first_name: "McTest",last_name: "McTest", password: "testing", email: "tester@testmail", created_at: "2017-09-13 01:13:04 -0600")
+      role = create(:role, name: "store_manager")
+      store = create(:store)
+      create(:store_user, user: user, role: role, store: store)
+      expect(user.store_manager?).to eq(true)
+
+    end
+
+    it "can check if store_admin" do
+      user = User.create(first_name: "McTest",last_name: "McTest", password: "testing", email: "tester@testmail", created_at: "2017-09-13 01:13:04 -0600")
+      role = create(:role, name: "store_admin")
+      store = create(:store)
+      create(:store_user, user: user, role: role, store: store)
+      expect(user.store_admin?).to eq(true)
+    end
+
+    it "can check if platform_admin" do
+      user = User.create(first_name: "McTest",last_name: "McTest", password: "testing", email: "tester@testmail", created_at: "2017-09-13 01:13:04 -0600", role: 1)
+
+      expect(user.role).to eq('platform_admin')
     end
   end
 end

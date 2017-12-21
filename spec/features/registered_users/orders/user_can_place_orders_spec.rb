@@ -11,7 +11,7 @@ feature "User can place an order" do
       end
 
   it "User can add an item to the cart" do
-    binding.pry
+
 
     expect(page).to have_content("You now have 1 #{item.title}.")
   end

@@ -15,7 +15,7 @@ feature "Admin can see an order associated with a store" do
   context "As an authenticated store admin" do
 
     it 'I can see a specific order for the store' do
-      
+
       visit admin_store_order_path(store.url, order)
 
       expect(page).to have_content(order.id)
@@ -25,12 +25,12 @@ feature "Admin can see an order associated with a store" do
 
     it 'I can update the status of a specific order' do
       visit admin_store_order_path(store.url, order)
-      click_on "Cancel"
+      select 'cancelled', from: "status"
+      click_on("Update Status")
 
-      expect(page).to have_content(order.id)
-      expect(page).to have_content(order.date)
-      expect(page).to have_content(order.status)
-
+      expect(current_path).to eq(admin_store_order_path(store.url, order))
+      expect(page).to have_content("Current Status: Cancelled")
+      expect(page).to have_content("Order ##{order.id} successfully updated")
     end
   end
 end
@@ -57,11 +57,12 @@ feature "Platform Admin can see an order associated with a store" do
 
     it 'I can update the status of a specific order' do
       visit admin_store_order_path(store.url, order)
-      click_on "Cancel"
+      select 'cancelled', from: "status"
+      click_on("Update Status")
 
-      expect(page).to have_content("#{order.id} successfully updated")
-      admin_store_path(store.url)
-
+      expect(current_path).to eq(admin_store_order_path(store.url, order))
+      expect(page).to have_content("Current Status: Cancelled")
+      expect(page).to have_content("Order ##{order.id} successfully updated")
     end
   end
 end
@@ -89,7 +90,7 @@ feature "Store Manager can see an order associated with a store" do
     it 'I cannot update the status of a specific order' do
       visit admin_store_order_path(store.url, order)
 
-      expect(page).to_not have_content("Cancel")
+      expect(page).to_not have_content("Update Status")
     end
   end
 end
