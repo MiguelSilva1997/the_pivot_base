@@ -15,13 +15,7 @@
             <th scope="row"> <%= link_to order.id, user_order_path(current_user, order) %></th>
             <td><%= order.date %></td>
             <td><%= order.status.capitalize %></td>
-            <td>
-              <% sum = 0 %>
-              <% order.items.each do |item| %>
-                <% sum += (OrderItem.find_by(item: item, order: order).original_item_price * OrderItem.find_by(item: item, order: order).quantity) %>
-              <% end %>
-              <%= number_to_currency(sum) %>
-          </td>
+            <td><%= number_to_currency(order.ordered_orginal_price) %></td>
           </tr>
         <% end %>
       </tbody>
