@@ -4,8 +4,15 @@ class StoresController < ApplicationController
   end
 
   def create
+    user = current_user
+    platform_admin = User.find_by(role:1)
     store = Store.new(store_params)
+
     if store.save
+      store_admin_role = Role.find_or_create_by(name: "store_admin")
+      platform_admin_role = Role.find_or_create_by(name: "platform_admin")
+      StoreUser.create(user: user, role: store_admin_role, store: store)
+      StoreUser.create(user: platform_admin, role: platform_admin_role, store: store)
       flash[:success] = "You have successfully submitted an application for #{store.name}!"
       redirect_back(fallback_location: dashboard_index_path)
     else
