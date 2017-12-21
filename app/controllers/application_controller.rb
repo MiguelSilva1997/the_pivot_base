@@ -20,10 +20,6 @@ class ApplicationController < ActionController::Base
     def authorize!
       current_permission = PermissionService.new(current_user, params[:controller], params[:action])
       not_found unless current_permission.authorized?
-<<<<<<< HEAD
-=======
-
->>>>>>> user can place an order
     end
 
     def not_found
