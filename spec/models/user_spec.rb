@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "validations" do
+describe User do
   context "invalid attributes" do
 
     it "is invalid without a first name" do
