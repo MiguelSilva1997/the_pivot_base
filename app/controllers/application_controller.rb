@@ -15,12 +15,13 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
 
-
   private
 
     def authorize!
       current_permission = PermissionService.new(current_user, params[:controller], params[:action])
       not_found unless current_permission.authorized?
+
+
     end
 
     def not_found
