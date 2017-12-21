@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "As a user" do
-  describe "visits /orders" do
+  describe "visits user_orders_path" do
     it "can see all past orders" do
       user = create(:user)
       create(:order, user: user)
@@ -10,7 +10,8 @@ describe "As a user" do
       order_1 = create(:order_with_items, user: user, items_with_quantity: items_with_quantity)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit '/orders'
+      visit user_orders_path(user)
+
 
       expect(page).to have_css(".order", count: 2)
 

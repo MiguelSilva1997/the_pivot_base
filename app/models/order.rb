@@ -11,6 +11,17 @@ class Order < ApplicationRecord
     items.sum(:price)
   end
 
+  def ordered_orginal_price
+    order_items.sum(:original_item_price) * order_items.sum(:quantity)
+
+  end
+
+  def subtotal
+    order_items.each do |order_item|
+      order_item.quantity * order_item.original_item_price
+    end
+  end
+
   def add(item_hash)
     item_hash.each do |item, quantity|
       items << item
