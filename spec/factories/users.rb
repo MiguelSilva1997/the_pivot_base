@@ -46,11 +46,7 @@ FactoryBot.define do
         create(:store_user, user: user, role: role, store: store2)
       end
     end
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> a97c29ae796bb2ad3560a82870502808b8ba8c3f
     factory :store_manager_with_store_items, class: User do
       after(:create) do |user|
         role = create(:role, name: "store_manager")
