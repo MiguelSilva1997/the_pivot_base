@@ -12,10 +12,12 @@ feature "User can place an order" do
 
   it "User can add an item to the cart" do
 
+
     expect(page).to have_content("You now have 1 #{item.title}.")
   end
 
   it "Can checkout if logged in as a user without Stripe" do
+
     visit cart_path
     click_on "Checkout"
 
