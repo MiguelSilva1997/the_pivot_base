@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'when a platform admin visits its dashboard' do
   before(:all) do
-    @platform_admin = create(:platform_admin)
+    @platform_admin = create(:platform_admin, role: "platform_admin")
     3.times do
       create(:store)
     end
