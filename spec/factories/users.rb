@@ -47,44 +47,6 @@ FactoryBot.define do
       end
     end
 
-<<<<<<< HEAD
-=======
-    factory :platform_admin_with_store_order, class: User do
-      after(:create) do |user|
-        user.role = 'platform_admin'
-        role = create(:role, name: "platform_admin")
-        store = create(:store_with_order)
-        create(:store_user, user: user, role: role, store: store)
-      end
-    end
-
-    factory :platform_admin_with_store_items, class: User do
-      after(:create) do |user|
-        user.role = 'platform_admin'
-        role = create(:role, name: "platform_admin")
-        store = create(:store_with_items)
-        create(:store_user, user: user, role: role, store: store)
-      end
-    end
-
-    factory :platform_admin_with_store_item, class: User do
-      after(:create) do |user|
-        user.role = 'platform_admin'
-        role = create(:role, name: "platform_admin")
-        store = create(:store_with_item)
-        create(:store_user, user: user, role: role, store: store)
-      end
-    end
-
-    factory :platform_admin, class: User do
-      after(:create) do |user|
-        role = create(:role, name: "platform_admin")
-        store = create(:store)
-        create(:store_user, user: user, role: role, store: store)
-      end
-    end
-
->>>>>>> origin/fixing_test
     factory :store_manager_with_store_items, class: User do
       after(:create) do |user|
         role = create(:role, name: "store_manager")

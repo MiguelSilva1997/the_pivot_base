@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'a platform admin can visit a store show page' do
-  let(:admin) {create(:platform_admin, role: "platform_admin")}
+  let(:admin) {create(:platform_admin_with_store_item)}
   let(:store) { admin.stores.first }
 
   context 'and manage store details' do
