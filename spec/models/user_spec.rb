@@ -30,7 +30,6 @@ describe "validations" do
     end
   end
 
-
   describe 'realtionships' do
     it 'has many roles' do
       user = build(:user)
@@ -63,7 +62,22 @@ describe "validations" do
       role = create(:role, name: "store_manager")
       store = create(:store)
       create(:store_user, user: user, role: role, store: store)
-      expect(user.store_manager?).to eq("Sep. 13, 2017")
+      expect(user.store_manager?).to eq(true)
+
+    end
+
+    it "can check if store_admin" do
+      user = User.create(first_name: "McTest",last_name: "McTest", password: "testing", email: "tester@testmail", created_at: "2017-09-13 01:13:04 -0600")
+      role = create(:role, name: "store_admin")
+      store = create(:store)
+      create(:store_user, user: user, role: role, store: store)
+      expect(user.store_admin?).to eq(true)
+    end
+
+    it "can check if platform_admin" do
+      user = User.create(first_name: "McTest",last_name: "McTest", password: "testing", email: "tester@testmail", created_at: "2017-09-13 01:13:04 -0600", role: 1)
+
+      expect(user.role).to eq('platform_admin')
     end
   end
 end
