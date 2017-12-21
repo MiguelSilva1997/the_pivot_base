@@ -9,7 +9,9 @@ feature "As a visitor" do
       item = create(:item, title: "Banana Stand")
       visit store_item_path(item.store.url, item.url)
       click_on "Add to Cart"
-      visit '/cart'
+
+      visit cart_path
+      
       expect(page).to have_content("Create new account")
       expect(page).to have_content("Login")
       expect(page).to_not have_content("Checkout")
