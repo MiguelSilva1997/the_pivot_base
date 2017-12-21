@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'when a platform admin visits its dashboard' do
   before(:each) do
-    @platform_admin = create(:platform_admin, email: "platform_admin@example.com")
+    @platform_admin = create(:platform_admin, email: "platform_admin@example.com", role: 'platform_admin')
     store = create(:store, name: "A&A")
     2.times do
       create(:store)

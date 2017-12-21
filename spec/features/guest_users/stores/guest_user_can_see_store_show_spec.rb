@@ -27,6 +27,7 @@ feature "a guest user visits a specific store" do
     end
 
     it "they do not see items associated with other stores" do
+
       expect(page).to_not have_link(@non_store_item.title)
     end
   end
