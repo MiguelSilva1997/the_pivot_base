@@ -1,0 +1,7 @@
+<%= form_for(@store_user, url:  admin_edit_store_user_path, method: 'patch') do |f| %>
+<div class="status_select_box">
+  <%= f.label :status %> <br />
+  <%= f.select(:role_id, @roles.map { |role| [role.name, role.id] }) %>
+</div>
+  <%= f.submit %>
+<% end %>

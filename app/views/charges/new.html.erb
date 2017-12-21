@@ -1,0 +1,25 @@
+<%= form_tag charges_path do %>
+<%= hidden_field_tag(:total, @amount) %>
+
+<% if @order %>
+  <%= hidden_field_tag(:order, @order.id) %>
+<% end %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>Amount <%= @amount %></span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-email="<%= current_user.email %>"
+          data-description="Rails Stripe customer"
+          data-amount="<%= @amount %>"
+          data-locale="auto">
+  </script>
+<% end %>

@@ -1,0 +1,82 @@
+<style>
+.cart_image{
+  width: 3em;
+  height: 4em;
+}
+
+      .checkout{
+        text-align: right;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .total{
+        text-align: right;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      h2{
+        text-align: center;
+        font-size: 3em;
+      }
+</style>
+<div class="container">
+  <% if current_user  %>
+    <h3> <%= current_user.first_name %>'s  Cart</h3>
+  <% else %>
+    <h3> Your Cart </h3>
+  <% end %>
+
+  <center>
+    <!-- <div class="col-10"> -->
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th></th>
+          <th></th>
+          <th>Subtotal</th>
+        </tr>
+        <tbody>
+
+          <% @items.each do |item, quantity| %>
+            <div class="item-#{item.id}">
+              <tr>
+                <th scope="row"><strong><%= link_to item.title, store_item_path(item.store.url, item.url) %></strong></th>
+                <td><%= image_tag item.image, :class => "cart_image"%></td>
+                <td>$<%= item.price %></td>
+                <td><%= quantity %></td>
+                <td><%= link_to "-", cart_path(id: item.id, status: "decrease"), action: :update, method: :patch, class: "badge badge-danger" %>
+                <%= link_to "+", cart_path(id: item.id, status: "increase"), action: :update, method: :patch, class: "badge badge-success" %></td>
+                <td><%= link_to "Remove", cart_path(id: item.id), method: :delete, class: "badge badge-danger" %></td>
+                <td>$<%= quantity * item.price %></td>
+              </tr>
+            </div>
+          <% end %>
+        </tbody>
+    </table>
+    <div class="total">
+      <% sum = 0 %>
+      <% @items.each do |item, quantity| %>
+        <% sum += (item.price * quantity) %>
+      <% end %>
+      <p><b>Total: <%= number_to_currency(sum) %></b></p>
+    </div>
+
+    <div class="checkout">
+      <% if current_user %>
+        <%= link_to "Checkout", user_orders_path(current_user.id), method: :post%>
+        <br>
+        <%= link_to "Checkout Instantly with Stripe", new_charge_path(total: sum), class: 'btn btn-primary' %>
+      <% else %>
+        <%= link_to "Login", login_path %> <br />
+        <%= link_to "Create new account", new_user_path %>
+      <% end %>
+    </div>
+    <!-- </div> -->
+  </center>
+</div>

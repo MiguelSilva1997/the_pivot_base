@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
-  def index
+  def show
     @items = @cart.cart_items
   end
 
@@ -15,12 +15,12 @@ class CartsController < ApplicationController
 
   def update
     item_id = params[:id]
-    if params[:condition] == "decrease"
+    if params[:status] == "decrease"
       @cart.decrease_quantity(item_id)
       if @cart.contents[item_id].nil?
         flash[:successfully_removed] = "Successfully removed <a href=#{item_path(item_id)}>#{Item.find(item_id).title}</a> from your cart."
       end
-    elsif params[:condition] == "increase"
+    elsif params[:status] == "increase"
       @cart.increase_quantity(item_id)
     end
     redirect_to cart_path

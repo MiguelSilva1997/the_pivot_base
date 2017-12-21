@@ -22,6 +22,11 @@ RSpec.describe Order do
       expect(order).to respond_to(:user)
     end
 
+    it 'belongs to a store' do
+      order = build(:order)
+      expect(order).to respond_to(:store)
+    end
+
     it 'has many items' do
       item = create(:item)
       order = build(:order, items: [item])
@@ -47,9 +52,10 @@ RSpec.describe Order do
 
     it "can add an item" do
       user = User.create!(first_name: "Testy", last_name: "McTest", password: "testing", email: "tester@testmail")
-      order = user.orders.create!(status: "ordered")
+      store = create(:store)
+      order = user.orders.create!(status: "ordered", store_id: store.id)
       category = create(:category)
-      item = create(:item)
+      item = create(:item, store_id: store.id)
       item_hash = {item => 1}
 
       expect(order.items).to eq([])

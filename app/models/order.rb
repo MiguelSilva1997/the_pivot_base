@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
+  belongs_to :store
   validates :status, presence: true
   has_many :order_items
   has_many :items, through: :order_items
@@ -8,6 +9,17 @@ class Order < ApplicationRecord
 
   def total_price
     items.sum(:price)
+  end
+
+  def ordered_orginal_price
+    order_items.sum(:original_item_price) * order_items.sum(:quantity)
+
+  end
+
+  def subtotal
+    order_items.each do |order_item|
+      order_item.quantity * order_item.original_item_price
+    end
   end
 
   def add(item_hash)
