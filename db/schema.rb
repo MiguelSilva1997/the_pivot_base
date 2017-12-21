@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 20171221191632) do
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
-    t.string "slug"
-    t.index ["slug"], name: "index_categories_on_slug", unique: true
+    t.string "url"
   end
 
   create_table "items", force: :cascade do |t|
@@ -103,7 +102,7 @@ ActiveRecord::Schema.define(version: 20171221191632) do
     t.integer "role", default: 0
     t.string "reset_digest"
     t.datetime "reset_sent_at"
-  end  
+  end
 
 
   add_foreign_key "items", "categories"
