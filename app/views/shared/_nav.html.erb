@@ -26,6 +26,17 @@
       <% end %>
     </div>
   </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stores</a>
+    <div class="dropdown-menu">
+      <% @stores.each do |store| %>
+        <% if store.status == 'active' %>
+        <%= link_to store.name, store_path(store.url), class: "dropdown-item" %>
+        <%end %>
+      <% end %>
+    </div>
+  </li>
   <li class="nav-item">
     <%= link_to 'Cart', cart_path, class: "btn" %>
     <span class="badge badge-secondary"><%= @cart.total_count %></span>
