@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20171221054718) do
     t.string "description"
     t.float "price"
     t.string "image"
+    t.integer "status", default: 0
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "condition", default: 0
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20171221054718) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

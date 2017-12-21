@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "validations" do
+describe Store do
   context "invalid attributes" do
 
     it "is invalid without name" do
