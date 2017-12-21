@@ -4,11 +4,20 @@ class PasswordResetsController < ApplicationController
   before_action :valid_user, only: [:edit, :update]
 
   def new
-    @user = User.find(params[:id])
   end
 
+  def create
+    @user = User.find_by(email: params[:password_reset][:email].downcase)
+    if @user
+      render 'edit'
+    else
+      flash[:danger] = "Email address not found"
+      redirect_to root_path
+    end
+  end
 
   def update
+    binding.pry
     if params[:user][:password].empty?
       @user.errors.add(:password, "can't be empty")
       render 'edit'

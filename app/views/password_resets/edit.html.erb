@@ -3,10 +3,21 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
-      <%= render 'shared/error_messages' %>
 
-  
+    <%= form_tag({controller: "password_resets", action: "update"}, method: "patch") do %>
+    <%= label_tag(:password, "Enter your New Password:") %>
+    <%= text_field_tag(:password) %>
+    <%= label_tag(:password_confirmation, "Plese Confirm Your Password:") %>
+    <%= text_field_tag(:password_confirmation) %>
+    <%= submit_tag("Update password") %>
+    <% end %>
+
+  </div>
+</div>
+    <!-- <%= form_for :user, :url => {:controller => "password_resets", :action => "update"} do |f| %>
+    <%binding.pry%>
+
+
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
@@ -14,6 +25,4 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <%= f.submit "Update password", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+    <% end %> -->

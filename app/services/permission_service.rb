@@ -31,6 +31,7 @@ class PermissionService
     return true if controller == "carts" && action.in?(%w(index show create update destroy))
     return true if controller == "users" && action.in?(%w(new create))
     return true if controller == "categories" && action.in?(%w(show))
+    return true if controller == "password_resets" && action.in?(%w(new create edit update))
   end
 
   def registered_user_permissions
@@ -44,6 +45,7 @@ class PermissionService
     return true if controller == "dashboard" && action.in?(%w(index))
     return true if controller == "categories" && action.in?(%w(show))
     return true if controller == "charges" && action.in?(%w(new create))
+    return true if controller == "password_resets" && action.in?(%w(new create edit update))
   end
 
   def store_manager_user_permissions
@@ -60,6 +62,7 @@ class PermissionService
     return true if controller == "admin/stores" && action.in?(%w(show))
     return true if controller == "categories" && action.in?(%w(show))
     return true if controller == "dashboard" && action.in?(%w(index))
+    return true if controller == "password_resets" && action.in?(%w(new create edit update))
   end
 
   def store_admin_user_permissions
@@ -77,6 +80,7 @@ class PermissionService
     return true if controller == "categories" && action.in?(%w(show))
     return true if controller == "dashboard" && action.in?(%w(index))
     return true if controller == "store_admin" && action.in?(%w(index))
+    return true if controller == "password_resets" && action.in?(%w(new create edit update))
   end
 
 
