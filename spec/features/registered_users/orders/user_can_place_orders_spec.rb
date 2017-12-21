@@ -5,15 +5,20 @@ feature "User can place an order" do
     let(:item) {create(:item)}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     user = User.create(first_name: "Tester", last_name: "McTesty", email: "testerson@testmail.com", password: "testing", address: "dummy address")
+=======
+    user = User.create(first_name: "Tester", last_name: "McTesty", email: "testerson@testmail.com", password: "testing", address: "dummy address")
+
+
+>>>>>>> 657df1c39691039cc2f292c2356f1d25de284297
 
     visit store_item_path
 
     click_on "Add to cart"
 
->>>>>>> wip create
       before(:each) do
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         visit store_item_path(item.store.url, item.url)
@@ -25,10 +30,8 @@ feature "User can place an order" do
 
     expect(page).to have_content("You now have 1 #{item.title}.")
   end
-<<<<<<< HEAD
-=======
 
->>>>>>> wip create
+
 
   it "Can checkout if logged in as a user without Stripe" do
 
@@ -38,15 +41,18 @@ feature "User can place an order" do
     expect(page).to have_content("Order was successfully placed")
     expect(current_path).to eq(user_orders_path(user))
 
-<<<<<<< HEAD
-=======
 
     click_on "Cart"
 
     expect(page).to have_content("Checkout")
 
->>>>>>> wip create
+
+    click_on "Cart"
+
+    expect(page).to have_content("Checkout")
+
   end
+
 
   it "Can checkout with Stripe" do
     visit cart_path

@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(version: 20171221191632) do
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
-    t.string "url"
+    t.string "slug"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "items", force: :cascade do |t|

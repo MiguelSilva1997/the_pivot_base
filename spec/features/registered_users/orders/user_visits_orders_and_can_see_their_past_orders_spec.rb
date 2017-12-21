@@ -11,7 +11,10 @@ describe "As a user" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit user_orders_path(user)
+<<<<<<< HEAD
+=======
 
+>>>>>>> development
 
       expect(page).to have_css(".order", count: 2)
 

@@ -11,6 +11,10 @@ describe "As a user" do
 
       visit user_orders_path(user.id)
 
+<<<<<<< HEAD
+      visit user_orders_path(user)
+=======
+>>>>>>> development
       click_on order.id
 
 

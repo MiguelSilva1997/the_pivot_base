@@ -68,9 +68,14 @@ Rails.application.routes.draw do
     resources :orders, only: [:create, :index, :show]
   end
 
+<<<<<<< HEAD
   resources :password_resets, only: [:edit, :update, :new, :create]
+=======
+  resources :password_resets, only: [:edit, :update]
+>>>>>>> 657df1c39691039cc2f292c2356f1d25de284297
   resources :charges
   resources :password_resets, only: [:edit, :update]
+
 
   get '/account/edit', to: 'users#edit'
   put '/account/:id', to: 'users#update'
