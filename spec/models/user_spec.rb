@@ -24,13 +24,13 @@ describe "validations" do
     end
 
     it "is invalid without a unique e-mail" do
-      user_1 = create(:user, email: "gob@example.com")
+      create(:user, email: "gob@example.com")
       user_2 = build(:user, email: "gob@example.com")
       expect(user_2).to be_invalid
     end
   end
 
-  describe 'realtionships' do
+  describe 'relationships' do
     it 'has many roles' do
       user = build(:user)
       expect(user).to respond_to(:roles)

@@ -47,6 +47,7 @@ class PermissionService
   end
 
   def store_manager_user_permissions
+    return true if controller == "stores" && action.in?(%w(index show new create))
     return true if controller == "main" && action.in?(%w(index))
     return true if controller == "admin/stores" && action.in?(%w(index show new create))
     return true if controller == "admin/items" && action.in?(%w(update edit index show)) #potentially nested resource with category or store
@@ -62,6 +63,7 @@ class PermissionService
   end
 
   def store_admin_user_permissions
+    return true if controller == "stores" && action.in?(%w(index show new create))
     return true if controller == "main" && action.in?(%w(index))
     return true if controller == "admin/stores" && action.in?(%w(index show new create update edit))
     return true if controller == "admin/items" && action.in?(%w(update edit index show destroy new create)) #potentially nested resource with category or store
