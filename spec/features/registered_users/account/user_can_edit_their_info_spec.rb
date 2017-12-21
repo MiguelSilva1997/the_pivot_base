@@ -12,7 +12,8 @@ describe "when a user visits its dashboard and clicks on update account" do
       expect(current_path).to eq('/account/edit')
 
       fill_in "user[first_name]", with: "Miguel"
-      click_on "Update User"
+
+      click_on "Update Account Information"
 
       expect(page).to have_content("Miguel")
     end
