@@ -66,9 +66,10 @@
       <% end %>
       <p><b>Total: <%= number_to_currency(sum) %></b></p>
     </div>
+
     <div class="checkout">
       <% if current_user %>
-        <%= link_to "Checkout", user_orders_path(current_user), method: :post%>
+        <%= link_to "Checkout", user_orders_path(current_user.id), method: :post%>
         <br>
         <%= link_to "Checkout Instantly with Stripe", new_charge_path(total: sum), class: 'btn btn-primary' %>
       <% else %>
