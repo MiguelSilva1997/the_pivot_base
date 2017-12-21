@@ -39,7 +39,7 @@ feature "Store Admin can see all orders associated with a store" do
     expect(current_path).to eq(admin_store_order_path(store.url, order))
   end
 
-  it "I can see a link to see a specifc order details" do
+  it "I can see a link to see a specific order details" do
     visit admin_store_orders_path(store.url)
 
     click_on "#{order.id}"
@@ -81,7 +81,6 @@ feature "Store manager can see all orders associated with a store" do
 
   it "I cannot see a link to edit an order" do
     visit admin_store_orders_path(store.url)
-
 
     expect(page).to_not have_content("Edit Order")
   end

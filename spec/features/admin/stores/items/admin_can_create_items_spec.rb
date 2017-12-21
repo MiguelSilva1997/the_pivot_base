@@ -30,7 +30,7 @@ feature " Store Admin can create an item" do
 
     it "I can create an item without an image and it defaults" do
       login_user(@admin.email, @admin.password)
-
+      
       visit admin_store_path(@admin.stores.first.url)
       click_on "See all Items"
 
@@ -49,7 +49,7 @@ feature " Store Admin can create an item" do
 end
 feature "Platform Admin can create an item" do
   before(:each) do
-    @platform_admin = create(:platform_admin_with_store_item)
+    @platform_admin = create(:platform_admin_with_store_item, role: "platform_admin")
   end
 
   context "As an authenticated platform_admin admin" do
