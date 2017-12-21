@@ -18,7 +18,7 @@ class CartsController < ApplicationController
     if params[:status] == "decrease"
       @cart.decrease_quantity(item_id)
       if @cart.contents[item_id].nil?
-        flash[:successfully_removed] = "Successfully removed <a href=#{item_path(item_id)}>#{Item.find(item_id).title}</a> from your cart."
+        flash[:successfully_removed] = "Successfully removed <a href=#{store_item_path(Item.find(item_id).store.url, Item.find(item_id).url)}>#{Item.find(item_id).title}</a> from your cart."
       end
     elsif params[:status] == "increase"
       @cart.increase_quantity(item_id)
@@ -29,7 +29,7 @@ class CartsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     @cart.delete_item(item.id)
-    flash[:successfully_removed] = "Successfully removed <a href=#{item_path(item)}>#{item.title}</a> from your cart."
+    flash[:successfully_removed] = "Successfully removed <a href=#{store_item_path(item.store.url, item.url)}>#{item.title}</a> from your cart."
     redirect_back(fallback_location: root_path)
   end
 

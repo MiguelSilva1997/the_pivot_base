@@ -17,7 +17,7 @@
 					<h2><strong><%= link_to "#{item.title}", store_item_path(@store.url, item.url) %></strong></h2> <br />
 					<%= item.description %> <br /> <br />
 					Price:$ <%= item.price %> <br />
-					<%= link_to "Add to cart", cart_path(id: item.id), class: "badge badge-primary" %></center>
+					<%= link_to "Add to Cart", cart_path(item_id: item.id), method: :post, class: "badge badge-primary" %></center>
 
 				<% end %>
 				<% end %>

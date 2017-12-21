@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :order do
     user
     store
+    status 0
 
     factory :ordered_order do
       status 0
