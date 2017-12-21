@@ -6,6 +6,7 @@ class PlatformAdminController < ApplicationController
     else
       @stores = Store.all
     end
+    @allstores = Store.all
   end
 
 end
