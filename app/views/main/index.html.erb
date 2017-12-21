@@ -9,7 +9,7 @@
     <% @popular_items.each do |item| %>
       <div class="center-block">
         <div class="card border-white" style="width: 15rem;">
-          <%= image_tag item.image, class: "card-img-top" %>
+          <%= image_tag item.image_file_name, class: "card-img-top" %>
           <div class="card-body">
             <center><p><strong><%= link_to item.title, category_path(item.category.url) %></strong></p>
 
