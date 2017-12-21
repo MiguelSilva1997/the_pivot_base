@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:create, :index, :show]
   end
 
+  resources :password_resets, only: [:edit, :update, :new, :create]
   resources :charges
   resources :password_resets, only: [:edit, :update]
 
