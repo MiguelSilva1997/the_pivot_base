@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Store do
+RSpec.describe Store do
   context "invalid attributes" do
 
     it "is invalid without name" do
