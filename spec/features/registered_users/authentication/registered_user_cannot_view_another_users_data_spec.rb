@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature "As a registered user" do
-  context "I cannot access other user information" do
-    let(:unauthorized_user)  { create(:user) }
-    let(:user)  { create(:user) }
-    let(:order) { create(:order_with_items) }
-    let(:item)  { order_with_items.first }
-    let(:category)  { item.category }
+  let(:unauthorized_user)  { create(:user) }
+  let(:user)  { create(:user) }
+  let(:order) { create(:order_with_items, user: user) }
+  let(:item)  { order.items.first }
+  let(:store) { item.store }
+  let(:category)  { item.category }
 
+  context "I cannot access other user information" do
     before do
       stub_login(unauthorized_user)
     end
@@ -15,19 +16,14 @@ RSpec.feature "As a registered user" do
     it "I cannot view another user's orders" do
       expect {
         visit user_orders_path(user)
-      }.to raise_error(ActiveRecord::RecordNotFound)
+        save_and_open_page
+      }.to raise_error(ActionController::RoutingError)
     end
 
     it "I cannot view another user's individual order" do
       expect {
         visit user_order_path(user, order)
-      }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it "I cannot edit another users account info" do
-      expect {
-        visit account_edit_path(user)
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      }.to raise_error(ActionController::RoutingError)
     end
   end
 
@@ -64,17 +60,17 @@ RSpec.feature "As a registered user" do
 
     it "i cannot edit a category" do
       expect {
-        visit edit_platform_admin_category_path
+        visit edit_platform_admin_category_path(category)
       }.to raise_error(ActionController::RoutingError)
     end
 
     it "i cannot edit a global user" do
       expect {
-        visit edit_platform_admin_user_path
+        visit edit_platform_admin_user_path(user)
       }.to raise_error(ActionController::RoutingError)
     end
 
-    it "i cannot add a global user" do
+    xit "i cannot add a global user" do
       expect {
         visit new_platform_admin_user_path
       }.to raise_error(ActionController::RoutingError)
@@ -88,25 +84,26 @@ RSpec.feature "As a registered user" do
 
     it "i cannot edit store users" do
       expect {
-        visit admin_edit_store_user_path
+        admin = create(:store_admin)
+        visit admin_edit_store_user_path(store.url, admin)
       }.to raise_error(ActionController::RoutingError)
     end
 
     it "i cannot create store users" do
       expect {
-        visit admin_new_store_user_path
+        visit admin_new_store_user_path(store.url)
       }.to raise_error(ActionController::RoutingError)
     end
 
     it "i cannot create store items" do
       expect {
-        visit admin_new_store_item_path
+        visit admin_new_store_item_path(store.url)
       }.to raise_error(ActionController::RoutingError)
     end
 
     it "i cannot edit store items" do
       expect {
-        visit admin_edit_store_item_path()
+        visit admin_edit_store_item_path(store.url, item.url)
       }.to raise_error(ActionController::RoutingError)
     end
 
@@ -118,7 +115,7 @@ RSpec.feature "As a registered user" do
 
     it "i cannot see admin order" do
       expect {
-        visit admin_store_order_path(store.url)
+        visit admin_store_order_path(store.url, order)
       }.to raise_error(ActionController::RoutingError)
     end
 

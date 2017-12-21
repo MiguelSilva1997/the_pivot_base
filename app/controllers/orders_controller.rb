@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :require_current_user
+  before_action :require_current_user, :valid_user
 
   def index
     @user = current_user
@@ -32,6 +32,12 @@ class OrdersController < ApplicationController
 
   def require_current_user
     redirect_to login_path unless current_user
+  end
+
+  def valid_user
+    if params[:user_id]
+      not_found unless current_user.id == params[:user_id]
+    end
   end
 
   def order_params
