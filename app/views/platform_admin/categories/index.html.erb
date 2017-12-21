@@ -1,7 +1,17 @@
-<h1><%= link_to "New Category", new_platform_admin_category_path %></h1>
+<center><h3><%= link_to "New Category", new_platform_admin_category_path %></h3> <br><br>
 
-<% @categories.each do |category| %>
-  <h3><%= category.title %></h3>
-  <%= link_to "Edit Category", edit_platform_admin_category_path(category) %>
-  <%= link_to "Delete Category", platform_admin_category_path(category), method: 'delete' %>
-<% end %>
+<div class="card-outer-container">
+  <div class="card-container">
+    <div class="row">
+    <% @categories.each do |category| %>
+      <div class="col-sm-4">
+        <div class="well">
+        <h4 class="card-title"><%=category.title%></h4>
+        <p class="card-text"><%= link_to "Edit Category", edit_platform_admin_category_path(category), class: 'category-link' %></p>
+        <p class="card-text"><%= link_to "Delete Category", platform_admin_category_path(category), class: 'category-link', method: 'delete' %> </p>
+        <br>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
