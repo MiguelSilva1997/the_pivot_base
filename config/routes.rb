@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         get '/:store_name/orders' => :index, as: 'store_orders'
         get '/:store_name/orders/:id' => :show, as: 'store_order'
         put '/:store_name/orders/:id' => :update
+        patch '/:store_name/orders/:id' => :update
       end
 
       controller :items do

@@ -37,10 +37,12 @@
   <p><b>Order Date:</b> <%= @order.date %><br />
   <b>Order Placed by:</b> <%= @order.user.full_name %><br />
   <b>Order Address:</b> <%= @order.user.address %><br />
-  <b>Order Status:</b> <%= @order.status.titleize %> />
-<% if current_user.store_admin? || current_user.platform_admin? %>
-<% if @order.status.titleize == ("Ordered" || "Paid") %>
-  <%= link_to "Cancel", admin_store_order_path(@store.url, @order.id, status: 'cancelled'), method: :put %>
-<% end %>
-<% end %>
+  <b>Current Status:</b> <%= @order.status.titleize %><br />
+  <% if current_user.store_admin? || current_user.platform_admin? %>
+    <%= form_for(@order, url: admin_store_order_path) do |f| %>
+      <%= f.label :status %> <br />
+      <%= select_tag :status, options_for_select(@statuses) %>
+      <%= f.submit "Update Status" %>
+    <% end %>
+  <% end %>
 </div>
