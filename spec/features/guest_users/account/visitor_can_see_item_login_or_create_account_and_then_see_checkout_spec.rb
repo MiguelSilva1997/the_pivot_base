@@ -3,9 +3,9 @@ require "rails_helper"
 RSpec.describe "As a visitor" do
   describe "when I visit my cart" do
     it "I can sign up or log in" do
-      create(:item, title: "Banana Stand")
-      visit items_path
-      click_on "Add to cart"
+      item = create(:item, title: "Banana Stand")
+      visit store_item_path(item.store.url, item.url)
+      click_on "Add to Cart"
       visit '/cart'
       expect(page).to have_content("Create new account")
       expect(page).to have_content("Login")

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "an admin can update store info" do
-  let(:admin) { create(:platform_admin) }
+  let(:admin) { create(:platform_admin_with_store_item) }
   let(:store) { admin.stores.first }
 
   before do
