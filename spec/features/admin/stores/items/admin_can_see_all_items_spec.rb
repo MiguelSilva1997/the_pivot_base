@@ -43,15 +43,14 @@ end
 
 feature 'A platform_admin can see all items associated with a store' do
   before(:each) do
-    @platform_admin = create(:platform_admin_with_store_items)
+    @platform_admin = create(:platform_admin_with_store_items, role: 'platform_admin')
   end
 
   context "As an authenticated platform admin" do
     it 'I can see all items for the store' do
 
       login_user(@platform_admin.email, @platform_admin.password)
-
-      visit  admin_store_path(@platform_admin.stores.first.url)
+      visit admin_store_path(@platform_admin.stores.first.url)
       click_on "See all Items"
 
       expect(current_path).to eq(admin_store_items_path(@platform_admin.stores.first.url))

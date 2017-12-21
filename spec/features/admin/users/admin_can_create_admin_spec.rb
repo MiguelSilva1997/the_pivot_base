@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "when an admin clicks on add new emplyee and fills out the form" do
   before(:each) do
-    @platform_admin = create(:platform_admin)
+    @platform_admin = create(:platform_admin, role: "platform_admin")
     @user = create(:user, first_name: "lola", email: "lola")
   end
   it "creates a new emplyee and it shows in the dashboard" do

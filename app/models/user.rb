@@ -29,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def platform_admin?
-    role = 'platform_admin'
+    role == 'platform_admin'
   end
 
   def full_name
