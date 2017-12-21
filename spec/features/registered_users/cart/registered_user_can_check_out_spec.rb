@@ -24,8 +24,6 @@ RSpec.describe 'As a user' do
 
       visit cart_path
       click_on("Increase")
-      save_and_open_page
-
 
       expect(page).to have_content("2")
     end

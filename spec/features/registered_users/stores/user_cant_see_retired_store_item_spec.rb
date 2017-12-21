@@ -21,7 +21,6 @@ RSpec.describe 'As a registered user' do
       store.items << create(:item)
 			item = store.items.first
 			visit store_path(store.url)
-			save_and_open_page
 
 			expect(page).to have_content(item.title)
 		end

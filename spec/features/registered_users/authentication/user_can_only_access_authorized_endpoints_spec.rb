@@ -16,7 +16,6 @@ RSpec.feature "As a registered user" do
     it "I cannot view another user's orders" do
       expect {
         visit user_orders_path(user)
-        save_and_open_page
       }.to raise_error(ActionController::RoutingError)
     end
 
