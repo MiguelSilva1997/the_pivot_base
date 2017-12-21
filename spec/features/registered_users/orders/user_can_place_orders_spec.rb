@@ -29,7 +29,11 @@ feature "User can place an order" do
     click_on "Checkout Instantly with Stripe"
 
     expect(current_path).to eq(new_charge_path)
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> user can place an order
     expect(page).to have_content("Amount ")
   end
 end
