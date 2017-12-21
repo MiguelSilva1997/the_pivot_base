@@ -16,7 +16,6 @@ Rails.application.routes.draw do
       get '/:store_name/edit' => :edit, as: 'edit_store'
       put '/:store_name' => :update
       patch '/:store_name' => :update
-      delete '/:store_name' => :destroy
 
       controller :orders do
         get '/:store_name/orders' => :index, as: 'store_orders'
@@ -69,6 +68,8 @@ Rails.application.routes.draw do
   end
 
   resources :password_resets, only: [:edit, :update]
+  resources :charges
+
 
   get '/account/edit', to: 'users#edit'
   put '/account/:id', to: 'users#update'
@@ -79,6 +80,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:create, :destroy, :update, :show]
 
 
+  get '/categories/:category_name', to: 'categories#show', as: 'category'
 
   get '/stores/new', to: 'stores#new', as: 'new_store'
 
@@ -88,6 +90,5 @@ Rails.application.routes.draw do
 
   get '/:store_name/:item_name', to: 'items#show', as: 'store_item'
 
-  get '/categories/:category_name', to: 'categories#show', as: 'category'
 
 end

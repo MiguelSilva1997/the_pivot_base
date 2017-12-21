@@ -15,8 +15,8 @@ class StoresController < ApplicationController
   end
 
   def show
-    @store = Store.find_by(name: params[:store_name])
-    @items = @store.items
+    @store = Store.find_by(url: params[:store_name])
+    not_found unless @store.status == "active"
   end
 
   private

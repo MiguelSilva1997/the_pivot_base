@@ -11,13 +11,14 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :password, presence: true
   validates :email, presence: true, uniqueness: true
 
+  enum role: [:default, :platform_admin]
 
   def self.account_manager(id)
     where.not(id: id)
   end
 
   def registered_user?
-    roles.empty?
+    id != nil && roles.empty?
   end
 
   def store_manager?
@@ -29,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def platform_admin?
-    roles.exists?(name: "platform_admin")
+    role == 'platform_admin'
   end
 
   def full_name

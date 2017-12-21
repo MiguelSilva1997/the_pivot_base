@@ -11,9 +11,9 @@
           <th>Order Placed</th>
           <th>Order Status</th>
           <th>Total</th>
-          <% if current_user.store_admin? || current_user.platform_admin? %>
+            <% if current_user.store_admin? || current_user.platform_admin? %>
           <th>Update</th>
-          <% end %>
+            <% end %>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +22,6 @@
             <th scope="row"> <%= link_to order.id,  admin_store_order_path(@store.url, order) %></th>
             <td><%= order.date %></td>
             <td><%= order.status.capitalize %></td>
-            <!-- <td>$<%= order.total_price %></td> -->
             <td>
               <% sum = 0 %>
               <% order.items.each do |item| %>

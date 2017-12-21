@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :require_current_user
+  before_action :require_current_user, :valid_user
 
   def index
     @user = current_user
@@ -7,11 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    # if current_admin?
-    #   @order = Order.find(params[:id])
-    # else
-    #   @order = current_user.orders.find(params[:id])
-    #end
+    @order = current_user.orders.find(params[:id])
   end
 
   def update
@@ -21,20 +17,29 @@ class OrdersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-
-  def new
-    order = Order.create(status: "ordered", user_id: current_user.id)
+  def create
     item_hash = @cart.cart_items
-    order.add(item_hash)
-    @cart.destroy
+		item_hash.each do |item, quantity|
+      order = Order.create(status: "ordered", user_id: current_user.id, store_id: item.store.id)
+			order.order_items.create(quantity: quantity, original_item_price: item.price, item: item)
+		end
+		@cart.destroy
     flash[:success] = "Order was successfully placed"
-    redirect_to orders_path
+    redirect_to user_orders_path(current_user)
   end
 
   private
 
   def require_current_user
     redirect_to login_path unless current_user
+  end
+
+  def valid_user
+
+    if params[:user_id]
+      not_found unless current_user.id == params[:user_id].to_i
+    end
+
   end
 
   def order_params
