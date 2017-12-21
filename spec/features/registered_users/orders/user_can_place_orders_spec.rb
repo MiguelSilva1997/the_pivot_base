@@ -1,36 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "User can place an order" do
-  it "and see the message 'order was successfully placed'" do
-
-    user = User.create(first_name: "Tester", last_name: "McTesty", email: "testerson@testmail.com", password: "testing", address: "dummy address")
+  it "and see the message order was successfully placed'" do
+    user = create(:user)
     item = create(:item)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit store_item_path(item.store.url, item.url)
 
 
-    visit store_item_path
+    click_on "Add to Cart"
 
-    click_on "Add to cart"
-
-    visit cart_path
-
-    within(".checkout") do
-      click_on("Login")
-    end
-
-    fill_in "session[email]", with: "testerson@testmail.com"
-    fill_in "session[password]", with: "testing"
-
-    within(".action") do
-      click_on("Login")
-    end
-
-    click_on "Cart"
-
-    expect(page).to have_content("Checkout")
-
-    click_on "Checkout"
-
-    expect(current_path).to eq('/orders')
-    expect(page).to have_content("Order was successfully placed")
+    expect(page).to have_content("You now have 1 #{item.title}.")
   end
 end
