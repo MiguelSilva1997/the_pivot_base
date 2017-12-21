@@ -19,7 +19,7 @@ RSpec.feature "Authenticated users security" do
     scenario "I cannot view another user's order" do
       chino = create(:user, first_name: "Chino")
       khaki = create(:user, first_name: "Khaki")
-      stub_logged_in_user(khaki)
+      stub_login(khaki)
 
       order = create(:order, user: chino)
 
@@ -30,7 +30,7 @@ RSpec.feature "Authenticated users security" do
 
     it "I cannot view the administrator screens" do
       user = create(:user)
-      stub_logged_in_user(user)
+      stub_login(user)
 
       expect {
         visit admin_dashboard_index_path
