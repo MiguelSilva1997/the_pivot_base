@@ -50,6 +50,7 @@ feature 'a platform admin can view an item show page' do
     end
   end
 end
+
 feature 'a Store manager can view an item show page' do
   before(:each) do
     @store_manager = create(:store_manager_with_store_item)
