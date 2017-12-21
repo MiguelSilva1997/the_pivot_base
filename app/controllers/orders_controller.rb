@@ -35,9 +35,11 @@ class OrdersController < ApplicationController
   end
 
   def valid_user
+
     if params[:user_id]
-      not_found unless current_user.id == params[:user_id]
+      not_found unless current_user.id == params[:user_id].to_i
     end
+
   end
 
   def order_params

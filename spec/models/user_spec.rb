@@ -30,12 +30,18 @@ describe "validations" do
     end
   end
 
-  context "it can have one of two roles" do
-    it "has a role" do
+  # context "it can have one of two roles" do
+  #   it "has a role" do
+  #     user = build(:user)
+  #     expect(user.role).to eq("default")
+  #   end
+  # end
+
+  describe 'realtionships' do
+    it 'has mansy roles' do
       user = build(:user)
-      expect(user.role).to eq("default")
+      expect(user).to respond_to(:roles)
     end
-  end
 
   context "instance methods" do
     it "can return user's full name" do
@@ -48,4 +54,5 @@ describe "validations" do
       expect(user.date_joined).to eq("Sep. 13, 2017")
     end
   end
+end
 end
