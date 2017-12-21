@@ -82,7 +82,6 @@ feature "Store manager can see all orders associated with a store" do
   it "I cannot see a link to edit an order" do
     visit admin_store_orders_path(store.url)
 
-
     expect(page).to_not have_content("Edit Order")
   end
 

@@ -20,7 +20,7 @@ require 'rails_helper'
       allow_any_instance_of(ApplicationController).to receive(:current_user). and_return(default_user)
 
       expect {
-        visit admin_dashboard_index_path
+        visit store_admin_dashboard_path
       }.to raise_error(ActionController::RoutingError)
     end
   end

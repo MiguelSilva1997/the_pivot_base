@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "when an admin clicks on edit employee and fills out the form" do
   before(:each) do
-    @platform_admin = create(:platform_admin, first_name: 'Miguel')
+    @platform_admin = create(:platform_admin, first_name: 'Miguel', role: 'platform_admin')
     create(:role, name: "store_admin")
   end
   it "can edit an employee" do
